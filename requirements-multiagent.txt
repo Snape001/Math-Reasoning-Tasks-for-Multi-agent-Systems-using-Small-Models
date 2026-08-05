@@ -1,0 +1,11 @@
+# PyTorch CUDA 版本请按显卡/驱动单独安装，不在此文件中锁定。
+accelerate>=1.14.0
+bitsandbytes>=0.50.0
+huggingface-hub>=1.25.0
+numpy>=1.26
+psutil>=6.0
+pyyaml>=6.0
+safetensors>=0.6
+sentencepiece>=0.2
+transformers>=5.14.0
+typing-extensions>=4.12
