@@ -1,0 +1,201 @@
+﻿problem_id,level,subject,route,route_reason,transition,baseline_answer,collaboration_answer,reference_answer,final_answer_source,baseline_tokens,collaboration_tokens
+test/algebra/1004.json,1,Algebra,single_agent,low_entropy,both_correct,4,4,4,router,2119,381
+test/algebra/109.json,2,Algebra,single_agent,low_entropy,both_correct,0,0,0,router,2063,360
+test/algebra/114.json,1,Algebra,single_agent,low_entropy,both_correct,4,4,4,router,3338,524
+test/algebra/1199.json,4,Algebra,single_agent,low_entropy,both_correct,1,1,1,router,2494,570
+test/algebra/1214.json,1,Algebra,single_agent,low_entropy,both_correct,1,1,1,router,1837,336
+test/algebra/1265.json,2,Algebra,multi_agent,high_entropy,both_correct,\frac{3}{2},\frac{3}{2},\frac{3}{2},checked_primary_solver,2145,3958
+test/algebra/1303.json,1,Algebra,multi_agent,high_entropy,both_correct,4,4,4,checked_primary_solver,2154,3397
+test/algebra/1338.json,4,Algebra,single_agent,low_entropy,both_correct,66,66,66,router,4492,704
+test/algebra/1339.json,5,Algebra,single_agent,low_entropy,both_correct,600,600,600,router,3530,1013
+test/algebra/1425.json,2,Algebra,single_agent,low_entropy,both_correct,2,2,2,router,2734,428
+test/algebra/1457.json,3,Algebra,single_agent,low_entropy,both_correct,-120,-120,-120,router,3065,630
+test/algebra/1519.json,3,Algebra,single_agent,low_entropy,both_correct,\frac{\sqrt{3}}{3},\frac{\sqrt{3}}{3},\frac{\sqrt{3}}{3},router,2373,399
+test/algebra/1814.json,2,Algebra,single_agent,low_entropy,both_correct,143,143,143,router,5784,916
+test/algebra/187.json,4,Algebra,single_agent,low_entropy,both_correct,3,3,3,router,3661,577
+test/algebra/1937.json,1,Algebra,single_agent,low_entropy,both_correct,1600,1600,1600,router,3527,419
+test/algebra/2023.json,3,Algebra,multi_agent,high_entropy,both_correct,1,1,1,checked_primary_solver,3291,4359
+test/algebra/2157.json,2,Algebra,single_agent,low_entropy,both_correct,2,2,2,router,2871,652
+test/algebra/2199.json,1,Algebra,single_agent,low_entropy,both_correct,7,7,7,router,3006,435
+test/algebra/2214.json,2,Algebra,multi_agent,high_entropy,both_correct,4,4,4,checked_primary_solver,2076,4465
+test/algebra/2253.json,4,Algebra,multi_agent,high_entropy,both_correct,\frac{3\sqrt{3}}{4},\frac{3\sqrt{3}}{4},\frac{3\sqrt{3}}{4},checked_primary_solver,3049,5023
+test/algebra/2277.json,5,Algebra,multi_agent,high_entropy,both_correct,0,0,0,checked_reviser,9137,11292
+test/algebra/2427.json,5,Algebra,single_agent,low_entropy,both_correct,10,10,10,router,7498,819
+test/algebra/2470.json,1,Algebra,multi_agent,high_entropy,both_correct,137\frac{1}{2},137\frac{1}{2},137 \frac{1}{2},checked_primary_solver,2687,4410
+test/algebra/2476.json,2,Algebra,single_agent,low_entropy,both_correct,10,10,10,router,3316,911
+test/algebra/251.json,2,Algebra,multi_agent,high_entropy,both_correct,2,2,2,checked_primary_solver,2407,3524
+test/algebra/2517.json,5,Algebra,multi_agent,router_token_limit,both_correct,-\frac{35}{9},-\frac{35}{9},-\frac{35}{9},checked_primary_solver,5000,7226
+test/algebra/2551.json,1,Algebra,multi_agent,high_entropy,both_correct,10,10,10,checked_primary_solver,2848,3960
+test/algebra/2570.json,4,Algebra,single_agent,low_entropy,both_correct,2107,2107,2107,router,3906,816
+test/algebra/2592.json,1,Algebra,single_agent,low_entropy,both_correct,26000,26000,26000,router,1900,406
+test/algebra/2680.json,2,Algebra,single_agent,low_entropy,both_correct,5r^5,5r^5,5r^5,router,2325,549
+test/algebra/2735.json,2,Algebra,single_agent,low_entropy,both_correct,\frac{11+9a}{20},\frac{11+9a}{20},\frac{11+9a}{20},router,2935,699
+test/algebra/2743.json,2,Algebra,single_agent,low_entropy,both_correct,29,29,29,router,3086,455
+test/algebra/2780.json,5,Algebra,multi_agent,high_entropy,both_correct,18.90,18.90,\$18.90,checked_primary_solver,5685,6709
+test/algebra/2789.json,1,Algebra,multi_agent,high_entropy,both_correct,47,47,47,checked_primary_solver,2507,4222
+test/algebra/291.json,5,Algebra,multi_agent,high_entropy,both_correct,\frac{2}{3},2/3,\frac{2}{3},checked_primary_solver,6691,8339
+test/algebra/351.json,3,Algebra,multi_agent,high_entropy,both_correct,2,2,2,checked_primary_solver,3057,6497
+test/algebra/478.json,1,Algebra,single_agent,low_entropy,both_correct,65,65,65,router,2213,449
+test/algebra/509.json,5,Algebra,multi_agent,high_entropy,both_correct,\dfrac{13}{6},\dfrac{13}{6},\frac{13}{6},checked_reviser,5914,11962
+test/algebra/524.json,2,Algebra,single_agent,low_entropy,both_correct,4005,4005,4005,router,2737,409
+test/algebra/529.json,4,Algebra,multi_agent,high_entropy,both_correct,81,81,81,checked_primary_solver,3599,6848
+test/algebra/694.json,3,Algebra,single_agent,low_entropy,both_correct,16,16,16,router,4026,832
+test/algebra/722.json,1,Algebra,single_agent,low_entropy,both_correct,9901,9901,9901,router,3131,375
+test/algebra/733.json,5,Algebra,multi_agent,router_token_limit,both_correct,6,6,6,checked_primary_solver,12487,10977
+test/algebra/824.json,4,Algebra,single_agent,low_entropy,both_correct,12,12,12,router,5161,838
+test/algebra/841.json,1,Algebra,single_agent,low_entropy,both_correct,350,350,350,router,3730,725
+test/algebra/849.json,1,Algebra,multi_agent,high_entropy,both_correct,18,18,18,checked_primary_solver,2074,3274
+test/algebra/853.json,5,Algebra,single_agent,low_entropy,both_correct,12,12,12,router,6871,978
+test/algebra/864.json,2,Algebra,single_agent,low_entropy,both_correct,"(-1, 6)","(-1, 6)","(-1,6)",router,2065,520
+test/algebra/892.json,5,Algebra,multi_agent,router_token_limit,both_correct,2,2,2,checked_reviser,13678,16058
+test/algebra/907.json,4,Algebra,single_agent,low_entropy,both_correct,2,2,2,router,5693,843
+test/algebra/988.json,1,Algebra,single_agent,low_entropy,both_correct,11,11,11,router,2328,461
+test/counting_and_probability/10.json,4,Counting & Probability,single_agent,low_entropy,both_correct,4,4,4,router,7456,1182
+test/counting_and_probability/1003.json,5,Counting & Probability,multi_agent,router_token_limit,both_correct,29,29,29,checked_primary_solver,16518,10523
+test/counting_and_probability/1009.json,5,Counting & Probability,multi_agent,high_entropy,both_correct,28,28,28,checked_primary_solver,5653,5449
+test/counting_and_probability/14.json,1,Counting & Probability,multi_agent,high_entropy,both_correct,\frac{1}{4},\frac{1}{4},\frac14,checked_reviser,2498,7590
+test/counting_and_probability/181.json,5,Counting & Probability,multi_agent,router_token_limit,both_wrong,,18,19,blackboard_repairer,24515,52205
+test/counting_and_probability/190.json,2,Counting & Probability,single_agent,low_entropy,both_correct,6,6,6,router,2816,466
+test/counting_and_probability/199.json,2,Counting & Probability,multi_agent,router_token_limit,rescued,,13,13,rescue_solver,22090,23048
+test/counting_and_probability/230.json,4,Counting & Probability,multi_agent,high_entropy,both_correct,2/21,2/21,\frac{2}{21},checked_reviser,6309,11311
+test/counting_and_probability/23957.json,3,Counting & Probability,multi_agent,high_entropy,both_correct,210,210,210,checked_primary_solver,3526,4309
+test/counting_and_probability/377.json,4,Counting & Probability,multi_agent,high_entropy,both_correct,\frac{448}{15625},\frac{448}{15625},\frac{448}{15625},checked_primary_solver,5755,6822
+test/counting_and_probability/389.json,2,Counting & Probability,multi_agent,high_entropy,both_correct,28,28,28,checked_primary_solver,2792,3633
+test/counting_and_probability/430.json,4,Counting & Probability,multi_agent,router_token_limit,both_correct,1/3,1/3,\frac{1}{3},checked_reviser,12454,15566
+test/counting_and_probability/508.json,3,Counting & Probability,multi_agent,high_entropy,both_correct,10080,10080,"10,\!080",checked_primary_solver,2576,4092
+test/counting_and_probability/51.json,5,Counting & Probability,multi_agent,high_entropy,both_correct,\frac{13}{18},\frac{13}{18},\frac{13}{18},checked_primary_solver,3969,5188
+test/counting_and_probability/71.json,3,Counting & Probability,multi_agent,high_entropy,both_correct,3,3,3,checked_primary_solver,6286,6702
+test/counting_and_probability/731.json,5,Counting & Probability,multi_agent,router_token_limit,both_wrong,,"\frac{1}{2}\min(k, \frac{1}{k})",\frac{1}{2},blackboard_repairer,21970,41756
+test/counting_and_probability/761.json,1,Counting & Probability,single_agent,low_entropy,rescued,1,3,3,router,2478,497
+test/counting_and_probability/913.json,3,Counting & Probability,multi_agent,high_entropy,both_correct,6,6,6,checked_primary_solver,3273,3650
+test/geometry/1097.json,4,Geometry,single_agent,low_entropy,both_correct,63,63,63,router,4751,697
+test/geometry/1108.json,2,Geometry,single_agent,low_entropy,both_correct,"(2, 4)","(2, 4)","(2,4)",router,2807,592
+test/geometry/226.json,1,Geometry,multi_agent,high_entropy,both_correct,180,180,180^\circ,checked_primary_solver,7953,8842
+test/geometry/434.json,1,Geometry,multi_agent,router_token_limit,both_wrong,,124,28,checked_primary_solver,21850,10648
+test/geometry/473.json,4,Geometry,multi_agent,high_entropy,both_correct,864,864,864 \mbox{ inches}^2,checked_primary_solver,2527,3967
+test/geometry/477.json,3,Geometry,multi_agent,high_entropy,both_correct,216,216,216,checked_reviser,2994,13240
+test/geometry/627.json,4,Geometry,single_agent,low_entropy,both_correct,17,17,17,router,6948,1030
+test/geometry/702.json,5,Geometry,multi_agent,router_token_limit,regressed,160,20,160,verified_blackboard_integrator,23031,42143
+test/geometry/795.json,3,Geometry,multi_agent,router_token_limit,both_correct,\frac{\sqrt{21}}{5},\frac{\sqrt{21}}{5},\frac{\sqrt{21}}{5},checked_primary_solver,8630,7986
+test/geometry/843.json,3,Geometry,single_agent,low_entropy,both_correct,6\sqrt{2},6\sqrt{2},6\sqrt{2},router,3932,840
+test/intermediate_algebra/1102.json,1,Intermediate Algebra,multi_agent,router_token_limit,both_correct,"1, -2","-2, 1","-2,1",checked_primary_solver,7247,8025
+test/intermediate_algebra/1111.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_correct,\frac{20000}{\pi},\frac{20000}{\pi},\frac{20000}{\pi},checked_primary_solver,8013,7662
+test/intermediate_algebra/1123.json,3,Intermediate Algebra,single_agent,low_entropy,both_correct,\frac{10}{11},\frac{10}{11},\frac{10}{11},router,5015,957
+test/intermediate_algebra/1151.json,3,Intermediate Algebra,multi_agent,router_token_limit,both_correct,1,1,1,checked_reviser,7099,16404
+test/intermediate_algebra/1197.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_wrong,,\frac{3}{14},\frac{3}{56},checked_reviser,21340,16131
+test/intermediate_algebra/1217.json,2,Intermediate Algebra,single_agent,low_entropy,both_correct,x^5 - x^4 + x^3 - x^2 + x - 1,x^5 - x^4 + x^3 - x^2 + x - 1,x^5 - x^4 + x^3 - x^2 + x - 1,router,6865,1303
+test/intermediate_algebra/134.json,1,Intermediate Algebra,single_agent,low_entropy,both_correct,-50,-50,-50,router,2849,410
+test/intermediate_algebra/1350.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_wrong,,,14,no_valid_answer,21515,41013
+test/intermediate_algebra/1388.json,5,Intermediate Algebra,single_agent,low_entropy,both_correct,"-2, 1","-2, 1","1,-2",router,10642,1642
+test/intermediate_algebra/1454.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_wrong,,,70 \sqrt{2},no_valid_answer,21470,38738
+test/intermediate_algebra/1467.json,5,Intermediate Algebra,multi_agent,router_token_limit,regressed,8n^2 + 4n + 1,,8n^2 + 4n + 1,no_valid_answer,20969,43676
+test/intermediate_algebra/149.json,1,Intermediate Algebra,multi_agent,high_entropy,both_correct,22,22,22,checked_primary_solver,2308,3631
+test/intermediate_algebra/1555.json,3,Intermediate Algebra,single_agent,low_entropy,both_correct,12,12,12,router,4208,904
+test/intermediate_algebra/1566.json,3,Intermediate Algebra,single_agent,low_entropy,both_correct,2k,2k,2k,router,7307,1384
+test/intermediate_algebra/1714.json,1,Intermediate Algebra,single_agent,low_entropy,both_correct,"(5, \infty)","(5, \infty)","(5,\infty)",router,2291,453
+test/intermediate_algebra/1779.json,4,Intermediate Algebra,multi_agent,router_token_limit,both_correct,15,15,15,blackboard_repairer,19656,43367
+test/intermediate_algebra/1791.json,5,Intermediate Algebra,single_agent,low_entropy,both_correct,-\frac{3}{8},-\frac{3}{8},-\frac{3}{8},router,10926,1632
+test/intermediate_algebra/1797.json,4,Intermediate Algebra,single_agent,low_entropy,both_correct,2\sqrt{5},2\sqrt{5},2 \sqrt{5},router,12611,1263
+test/intermediate_algebra/1837.json,3,Intermediate Algebra,single_agent,low_entropy,both_correct,34,34,34,router,6108,794
+test/intermediate_algebra/1930.json,5,Intermediate Algebra,multi_agent,router_token_limit,rescued,,0.25,\frac{1}{4},unchecked_reviser_fallback,21405,22636
+test/intermediate_algebra/199.json,3,Intermediate Algebra,multi_agent,high_entropy,both_correct,x^8 + x^7 + x^6 + x^5 + x^4 + x^3 + x^2 + x + 1,x^8 + x^7 + x^6 + x^5 + x^4 + x^3 + x^2 + x + 1,x^8 + x^7 + x^6 + x^5 + x^4 + x^3 + x^2 + x + 1,checked_reviser,10378,13918
+test/intermediate_algebra/1994.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_correct,p - q,p-q,p - q,checked_primary_solver,5310,8471
+test/intermediate_algebra/2015.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_wrong,,,"\{1\pm\sqrt{5},-2\}",no_valid_answer,21605,42670
+test/intermediate_algebra/2022.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_wrong,,,64,no_valid_answer,21550,38504
+test/intermediate_algebra/2046.json,2,Intermediate Algebra,single_agent,low_entropy,both_correct,2,2,2,router,8155,1186
+test/intermediate_algebra/232.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_correct,81,81,81,checked_reviser,9386,12308
+test/intermediate_algebra/337.json,1,Intermediate Algebra,single_agent,low_entropy,both_correct,22,22,22,router,4814,1117
+test/intermediate_algebra/428.json,2,Intermediate Algebra,single_agent,low_entropy,both_correct,"3, 5, 7","3, 5, 7","3, 5, 7",router,6442,1508
+test/intermediate_algebra/431.json,1,Intermediate Algebra,single_agent,low_entropy,both_correct,(a+5)(b+2),(a+5)(b+2),(a+5)(b+2),router,2137,454
+test/intermediate_algebra/591.json,4,Intermediate Algebra,single_agent,low_entropy,both_correct,24,24,24,router,4705,694
+test/intermediate_algebra/607.json,3,Intermediate Algebra,multi_agent,router_token_limit,both_correct,13535,13535,13535,checked_reviser,16118,16380
+test/intermediate_algebra/752.json,1,Intermediate Algebra,multi_agent,high_entropy,both_correct,3,3,3,checked_primary_solver,5047,5996
+test/intermediate_algebra/834.json,3,Intermediate Algebra,single_agent,low_entropy,both_correct,9,9,9,router,5193,925
+test/intermediate_algebra/894.json,3,Intermediate Algebra,multi_agent,router_token_limit,both_correct,2,2,2,checked_primary_solver,20167,9665
+test/intermediate_algebra/90.json,4,Intermediate Algebra,multi_agent,router_token_limit,both_correct,898,898,898,checked_primary_solver,18349,9557
+test/intermediate_algebra/960.json,5,Intermediate Algebra,multi_agent,router_token_limit,both_wrong,,\frac{43}{14},\frac{17}{21},blackboard_integrator_fallback,21385,38803
+test/number_theory/1032.json,3,Number Theory,multi_agent,high_entropy,both_correct,2220,2220,2220,checked_reviser,11854,11414
+test/number_theory/1065.json,4,Number Theory,multi_agent,high_entropy,both_correct,17,17,17,checked_primary_solver,7147,7047
+test/number_theory/1257.json,4,Number Theory,single_agent,low_entropy,both_correct,204_5,204_5,204_5,router,5789,559
+test/number_theory/132.json,1,Number Theory,single_agent,low_entropy,both_correct,0,0,0,router,2615,575
+test/number_theory/156.json,4,Number Theory,single_agent,low_entropy,both_correct,13,13,13,router,4942,1117
+test/number_theory/183.json,3,Number Theory,multi_agent,router_token_limit,both_correct,14,14,14,checked_primary_solver,10220,7804
+test/number_theory/234.json,2,Number Theory,single_agent,low_entropy,both_correct,16,16,16,router,4753,704
+test/number_theory/239.json,1,Number Theory,multi_agent,high_entropy,both_correct,2,2,2,checked_primary_solver,4398,4183
+test/number_theory/342.json,1,Number Theory,single_agent,low_entropy,both_correct,0,0,0,router,1669,322
+test/number_theory/357.json,4,Number Theory,single_agent,low_entropy,both_correct,21,21,21,router,9870,1276
+test/number_theory/410.json,2,Number Theory,single_agent,low_entropy,both_correct,0.35625,0.35625,.35625,router,11205,556
+test/number_theory/459.json,3,Number Theory,single_agent,low_entropy,both_correct,\frac{639}{40},\frac{639}{40},\frac{639}{40},router,4531,799
+test/number_theory/466.json,1,Number Theory,single_agent,low_entropy,both_correct,1,1,1,router,2737,410
+test/number_theory/521.json,2,Number Theory,single_agent,low_entropy,both_correct,18,18,18,router,3815,515
+test/number_theory/533.json,4,Number Theory,multi_agent,high_entropy,both_correct,1030,1030,1030,checked_reviser,5739,11830
+test/number_theory/598.json,3,Number Theory,single_agent,low_entropy,both_correct,0.0000672,0.0000672,.0000672,router,5518,1158
+test/number_theory/612.json,1,Number Theory,multi_agent,high_entropy,both_correct,2,2,2,checked_primary_solver,3566,4601
+test/number_theory/631.json,5,Number Theory,single_agent,low_entropy,both_correct,36,36,36,router,6850,966
+test/number_theory/634.json,4,Number Theory,multi_agent,router_token_limit,both_correct,333,333,333,checked_primary_solver,3457,7490
+test/number_theory/691.json,3,Number Theory,multi_agent,high_entropy,both_correct,255,255,255,checked_primary_solver,3513,5327
+test/number_theory/769.json,5,Number Theory,single_agent,low_entropy,both_correct,9,9,9,router,6141,1109
+test/number_theory/864.json,3,Number Theory,multi_agent,high_entropy,both_correct,52_8,52_8,52_8,checked_primary_solver,2943,4103
+test/number_theory/931.json,2,Number Theory,single_agent,low_entropy,both_correct,49,49,49,router,7014,1089
+test/prealgebra/1044.json,5,Prealgebra,single_agent,dense_visual_router_preserved,both_correct,5.4,5.4,5.4 \text{ cents},router,7909,1797
+test/prealgebra/1113.json,2,Prealgebra,multi_agent,high_entropy,both_correct,60,60,60,checked_primary_solver,2827,4977
+test/prealgebra/1114.json,2,Prealgebra,multi_agent,high_entropy,both_correct,15,15,15\mbox{ cm}^2,checked_primary_solver,3839,6868
+test/prealgebra/1128.json,5,Prealgebra,multi_agent,router_token_limit,both_correct,64,64,64,rescue_solver,4909,21831
+test/prealgebra/1187.json,2,Prealgebra,multi_agent,router_token_limit,both_correct,21,21,21,checked_primary_solver,9894,9473
+test/prealgebra/1203.json,5,Prealgebra,single_agent,low_entropy,both_correct,36,36,\$36,router,2353,395
+test/prealgebra/1227.json,3,Prealgebra,multi_agent,high_entropy,both_correct,60,60,60,checked_primary_solver,2785,4119
+test/prealgebra/1238.json,3,Prealgebra,single_agent,low_entropy,both_correct,2,2,2,router,3275,450
+test/prealgebra/1247.json,2,Prealgebra,single_agent,low_entropy,both_correct,5,5,5,router,3300,558
+test/prealgebra/1272.json,1,Prealgebra,multi_agent,high_entropy,both_correct,\frac{13}{15},\frac{13}{15},\frac{13}{15},checked_primary_solver,2751,3829
+test/prealgebra/1317.json,1,Prealgebra,single_agent,low_entropy,both_correct,4,4,4,router,2054,355
+test/prealgebra/1423.json,5,Prealgebra,multi_agent,high_entropy,both_correct,12\pi,12\pi,12\pi,checked_primary_solver,2951,4008
+test/prealgebra/1436.json,4,Prealgebra,multi_agent,high_entropy,both_correct,6,6,6,checked_primary_solver,3719,5220
+test/prealgebra/153.json,4,Prealgebra,single_agent,low_entropy,both_correct,\frac{5}{9},\frac{5}{9},\frac 59,router,4205,467
+test/prealgebra/1686.json,3,Prealgebra,single_agent,low_entropy,both_correct,4,4,4,router,3596,559
+test/prealgebra/1747.json,1,Prealgebra,multi_agent,high_entropy,both_correct,1,1,1,checked_primary_solver,2491,3747
+test/prealgebra/1807.json,3,Prealgebra,multi_agent,high_entropy,both_correct,120,120,120,checked_primary_solver,4135,4560
+test/prealgebra/1834.json,4,Prealgebra,multi_agent,high_entropy,both_correct,\sqrt{53},\sqrt{53},\sqrt{53},checked_primary_solver,2630,3656
+test/prealgebra/1840.json,2,Prealgebra,single_agent,low_entropy,both_correct,78,78,78,router,2766,696
+test/prealgebra/1865.json,4,Prealgebra,single_agent,dense_visual_router_preserved,both_correct,12^{\text{th}},12^{\text{th}},12,router,6068,1067
+test/prealgebra/1907.json,2,Prealgebra,single_agent,low_entropy,both_correct,17,17,17,router,2364,402
+test/prealgebra/192.json,1,Prealgebra,single_agent,low_entropy,both_correct,2,2,2,router,2167,364
+test/prealgebra/1922.json,2,Prealgebra,single_agent,low_entropy,both_correct,1251,1251,1251,router,2394,434
+test/prealgebra/1924.json,2,Prealgebra,single_agent,low_entropy,both_correct,2k + 2,2k + 2,2k+2,router,1799,341
+test/prealgebra/1973.json,4,Prealgebra,single_agent,low_entropy,both_correct,4,4,4,router,2016,610
+test/prealgebra/2019.json,2,Prealgebra,single_agent,low_entropy,both_correct,4.5,4.5,4.5,router,2214,334
+test/prealgebra/2037.json,4,Prealgebra,single_agent,low_entropy,both_correct,550,550,550,router,2873,596
+test/prealgebra/2057.json,4,Prealgebra,multi_agent,high_entropy,both_correct,90,90,90,checked_primary_solver,3036,3886
+test/prealgebra/307.json,1,Prealgebra,single_agent,low_entropy,both_correct,240,240,240,router,2199,383
+test/prealgebra/465.json,4,Prealgebra,multi_agent,high_entropy,both_correct,5,5,5,checked_reviser,16607,15640
+test/prealgebra/572.json,2,Prealgebra,single_agent,low_entropy,both_correct,0.15,0.15,0.15,router,2668,361
+test/prealgebra/805.json,3,Prealgebra,multi_agent,high_entropy,both_correct,41,41,41,rescue_solver,5519,16031
+test/prealgebra/951.json,5,Prealgebra,single_agent,low_entropy,both_correct,12,12,12,router,3540,606
+test/prealgebra/977.json,2,Prealgebra,single_agent,low_entropy,both_correct,23,23,23,router,2073,495
+test/prealgebra/996.json,1,Prealgebra,multi_agent,high_entropy,both_correct,9,9,9,checked_primary_solver,3309,4535
+test/precalculus/1056.json,4,Precalculus,multi_agent,router_token_limit,both_correct,288\pi,288\pi,288 \pi,checked_reviser,8479,14989
+test/precalculus/1082.json,3,Precalculus,multi_agent,router_token_limit,both_correct,\frac{8}{15},\frac{8}{15},\frac{8}{15},checked_reviser,10429,12134
+test/precalculus/1199.json,4,Precalculus,multi_agent,router_token_limit,both_correct,\pi,\pi,\pi,rescue_solver,15741,21195
+test/precalculus/1201.json,3,Precalculus,multi_agent,router_token_limit,both_correct,11,11,11,checked_reviser,16917,17230
+test/precalculus/1202.json,5,Precalculus,multi_agent,router_token_limit,both_correct,27,27,27,checked_reviser,21525,17865
+test/precalculus/1252.json,2,Precalculus,multi_agent,high_entropy,both_correct,1,1,1,checked_primary_solver,5695,6599
+test/precalculus/1289.json,1,Precalculus,single_agent,low_entropy,both_correct,-41,-41,-41,router,2184,454
+test/precalculus/1291.json,3,Precalculus,single_agent,low_entropy,both_correct,1 - 12i,1 - 12i,1 - 12i,router,4090,806
+test/precalculus/1300.json,3,Precalculus,multi_agent,high_entropy,both_correct,\begin{pmatrix} -1/3 \\ 2/3 \\ 5/3 \end{pmatrix},"\left(-\frac{1}{3}, \frac{2}{3}, \frac{5}{3}\right)",\begin{pmatrix} -1/3 \\ 2/3 \\ 5/3 \end{pmatrix},checked_primary_solver,7835,7569
+test/precalculus/1303.json,1,Precalculus,single_agent,low_entropy,both_correct,\sqrt{51},\sqrt{51},\sqrt{51},router,6605,1699
+test/precalculus/1313.json,4,Precalculus,single_agent,low_entropy,both_correct,46,46,46,router,4946,1478
+test/precalculus/145.json,4,Precalculus,multi_agent,router_token_limit,both_correct,\begin{pmatrix} -7 \\ 16 \\ 5 \end{pmatrix},"(-7, 16, 5)",\begin{pmatrix} -7 \\ 16 \\ 5 \end{pmatrix},checked_primary_solver,14403,8145
+test/precalculus/323.json,5,Precalculus,multi_agent,router_token_limit,both_correct,y = 2x + 3,y = 2x + 3,y = 2x + 3,checked_reviser,11627,13384
+test/precalculus/34.json,2,Precalculus,single_agent,low_entropy,both_correct,-4,-4,-4,router,4264,1026
+test/precalculus/356.json,3,Precalculus,single_agent,low_entropy,both_correct,y = -2x,y = -2x,y = -2x,router,4165,846
+test/precalculus/43.json,1,Precalculus,multi_agent,high_entropy,both_correct,"(15, -29)","(15, -29)","(15,-29)",rescue_solver,2494,12748
+test/precalculus/499.json,4,Precalculus,multi_agent,router_token_limit,both_correct,"\left[ \frac{\pi^2}{8}, \frac{5\pi^2}{4} \right]","\left[\frac{\pi^2}{8}, \frac{5\pi^2}{4}\right]","\left[ \frac{\pi^2}{8}, \frac{5 \pi^2}{4} \right]",checked_reviser,8546,12477
+test/precalculus/541.json,2,Precalculus,multi_agent,high_entropy,both_correct,"(1.5, -13)","\left(\frac{3}{2}, -13\right)","\left( \frac{3}{2}, -13 \right)",checked_primary_solver,4071,4826
+test/precalculus/625.json,3,Precalculus,single_agent,low_entropy,both_correct,\begin{pmatrix} \frac{16}{49} \\ \frac{48}{49} \\ \frac{24}{49} \end{pmatrix},\frac{8}{49}\begin{pmatrix} 2 \\ 6 \\ 3 \end{pmatrix},\begin{pmatrix} 16/49 \\ 48/49 \\ 24/49 \end{pmatrix},router,3720,786
+test/precalculus/675.json,5,Precalculus,multi_agent,router_token_limit,both_correct,4,4,4,checked_primary_solver,5292,7271
+test/precalculus/697.json,2,Precalculus,multi_agent,router_token_limit,both_correct,-\sqrt{3},-\sqrt{3},-\sqrt{3},checked_reviser,20212,16026
+test/precalculus/768.json,5,Precalculus,multi_agent,router_token_limit,both_wrong,"3-2\sqrt{2}, 3+2\sqrt{2}, -3+2\sqrt{2}, -3-2\sqrt{2}","-3-2\sqrt{2}, 2\sqrt{2}-3, 3-2\sqrt{2}, 3+2\sqrt{2}",3 \pm 2 \sqrt{2},rescue_solver,19556,23714
+test/precalculus/779.json,2,Precalculus,single_agent,low_entropy,both_correct,-2 + 7i,-2+7i,-2 + 7i,router,2652,410
+test/precalculus/801.json,3,Precalculus,multi_agent,router_token_limit,both_correct,55^\circ,55,55^\circ,checked_reviser,18796,15658
+test/precalculus/927.json,4,Precalculus,single_agent,low_entropy,both_correct,90,90^\circ,90^\circ,router,9013,1035
+test/precalculus/96.json,3,Precalculus,single_agent,low_entropy,both_correct,1.75,\frac{7}{4},\frac{7}{4},router,5280,1193
+test/precalculus/989.json,4,Precalculus,multi_agent,router_token_limit,both_correct,12,12,12,checked_reviser,21305,15444

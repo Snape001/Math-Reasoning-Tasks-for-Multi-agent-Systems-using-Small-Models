@@ -1,0 +1,51 @@
+{
+  "summary": {
+    "problems": 200,
+    "baseline_accuracy": 0.935,
+    "collaboration_accuracy": 0.94,
+    "accuracy_delta": 0.005,
+    "rescued": 3,
+    "regressed": 2,
+    "both_correct": 185,
+    "both_wrong": 10,
+    "mcnemar_exact_p": 1.0,
+    "avg_baseline_tokens": 6813.03,
+    "avg_collaboration_tokens": 6648.475,
+    "token_multiplier": 0.9758470166724644
+  },
+  "by_route": {
+    "single_agent": {
+      "both_correct": 98,
+      "rescued": 1
+    },
+    "multi_agent": {
+      "both_correct": 87,
+      "both_wrong": 10,
+      "rescued": 2,
+      "regressed": 2
+    }
+  },
+  "by_level": {
+    "1": {
+      "both_correct": 38,
+      "rescued": 1,
+      "both_wrong": 1
+    },
+    "2": {
+      "both_correct": 39,
+      "rescued": 1
+    },
+    "4": {
+      "both_correct": 40
+    },
+    "5": {
+      "both_correct": 28,
+      "both_wrong": 9,
+      "regressed": 2,
+      "rescued": 1
+    },
+    "3": {
+      "both_correct": 40
+    }
+  }
+}
