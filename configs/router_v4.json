@@ -1,0 +1,14 @@
+{
+  "method": "normalized_generation_entropy",
+  "entropy_threshold": 0.023299,
+  "target_route_rate": 0.3,
+  "calibration_size": 20,
+  "entropy_stride": 8,
+  "route_rule": "route_score > entropy_threshold",
+  "forced_routes": [
+    "missing_boxed_answer",
+    "router_token_limit",
+    "missing_entropy"
+  ],
+  "source": "same calibrated entropy gate as v3 for controlled comparison"
+}
