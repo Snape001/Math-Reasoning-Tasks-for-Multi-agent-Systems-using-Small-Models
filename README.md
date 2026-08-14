@@ -1,182 +1,172 @@
-# 小模型多智能体数学推理系统
+# Multi-Agent Mathematical Reasoning
 
-本项目基于本地 `Qwen3.5-4B`，在固定的 MATH-500 子集上比较 Direct、CoT、Self-Consistency 与多智能体协作推理。开发集为 `data/dev_20.jsonl`，正式测试集固定为 `data/eval_200.jsonl`。
+本项目在单张 NVIDIA GPU 上，以本地 `Qwen3.5-4B` 为统一基座模型，比较 Direct、CoT、Self-Consistency 与 V1–V4.1 多智能体数学推理结构。最终交付版本为 **V4.1**；V1–V4 均作为结构演进与消融依据保留。
 
-当前保留 V1、V2、V3、V4 和最终 V4.1。V4.1 是最新正式版本，在 200 题上取得 **193/200（96.5%）**。
+## 1. 最终结构：V4.1
 
-## 环境
+V4.1 先用一个低成本 entropy router 判断是否需要协作。进入协作后，三个 solver 使用与 Self-Consistency 相同的 CoT 提示词、采样参数和独立随机种子：有 2/3 一致答案时立即锁定；只有没有形成多数时，才启动针对争议点的后续 agent。
 
-- Conda 环境：`multiagent`
-- Python：`D:/anaconda3/envs/multiagent/python.exe`
-- 模型：本地 `Qwen3.5-4B`
-- 默认模型目录：`baselines/models`
-- 量化：4-bit NF4，BF16 计算
-- 最大输入/生成 Token：4096/4096
-- 正式实验：随机种子 42，`--strict-model`
-
-安装依赖：
-
-```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m pip install -r requirements-multiagent.txt
+```mermaid
+flowchart LR
+    P["数学题"] --> R["Entropy router"]
+    R -->|低不确定性| S["直接采用 router 答案"]
+    R -->|高不确定性/答案缺失/截断| A["3 个同分布 SC solver"]
+    A -->|2/3 多数| L["锁定多数答案"]
+    A -->|分歧| E["Evidence Auditor"]
+    E --> D["Disagreement Resolver"]
+    D -->|完整提交| O["最终答案"]
+    D -->|截断或未提交| F["Constraint-aware Finalizer"]
+    F --> O
 ```
 
-也可通过环境变量 `MULTIAGENT_MODEL_PATH` 指向其他本地模型目录。
+后续 agent 不只是补齐 solver 被截断的末尾：
 
-## 版本演进
+- `Evidence Auditor` 从三条独立轨迹中抽取题目目标、约束、已证事实和最早争议步骤，并给出必须复算的判别点；它不按票数选答案。
+- `Disagreement Resolver` 只重算这个判别点，再回到原题核对答案类型、定义域、符号、计数重数或几何关系。
+- `Constraint-aware Finalizer` 仅在 resolver 没有规范提交时使用；它检查已有推导是否满足审计器给出的提交条件，不重新展开完整求解。
+- 若所有后续 agent 都无法可靠提交，只在三条 SC 轨迹中恰有一条“未截断且含规范最终答案”时才允许单例回退，否则输出未验证，避免凭空猜测。
 
-### V1：线性角色协作
+每次模型调用最大输入和最大输出均为 4096 token。验证/争议解决 agent 可读取完整 4096-token 输入窗口，solver 轨迹通过 token-aware 摘要装入上下文，避免简单按字符只保留开头和结尾。
+
+## 2. 版本演进
+
+| 版本 | 主要结构 |
+|---|---|
+| V1 | Solver → Critic → Verifier → Judge，固定四次调用 |
+| V2 | entropy router 决定单 agent 或条件协作 |
+| V3 | 闭环验证、修订与困难题救援分支 |
+| V4 | 三候选、条件 reviewer 与仲裁器 |
+| V4.1 | 同分布 SC3 候选、多数锁定、仅对争议点进行证据审计与复算 |
+
+## 3. 目录说明
 
 ```text
-Solver -> Critic -> Verifier -> Judge
+multi_agent_math/
+├─ agents/          V1–V4.1 的角色 agent 与提示词
+├─ baselines/       Direct、CoT、SC 及 V1–V4.1 工作流
+│  └─ models/       本地 Qwen3.5 权重（约 9.3 GB）
+├─ configs/         V2–V4.1 router 阈值配置
+├─ core/            模型加载、生成配置、置信度与模型校验
+├─ data/            dev_20、eval_200 和 V4.1 七道错题开发集
+├─ results/         保留的开发集、正式集与配对分析结果
+├─ scripts/         运行、分析、审计和环境检查入口
+└─ utils/           答案抽取、归一化与数学等价判定
 ```
 
-先建立最基本的角色分工和消息传递：Solver 求解，Critic 定位错误，Verifier 检查关键步骤，Judge 综合证据。问题是错误会沿单一路径传播，后续 Agent 容易被前文锚定。
+关键数据集：
 
-### V2：熵路由与独立重算
+- `data/dev_20.jsonl`：20 题开发集。
+- `data/eval_200.jsonl`：固定 200 题正式集。
 
-```text
-Entropy Router
-  ├─ 低风险：Router 直接提交
-  └─ 高风险：两个独立 Solver -> Critic 比较
-                             -> Verifier 独立重算
-                             -> Judge 裁决
-```
+## 4. 实验环境
 
-V2 引入生成熵路由：简单题只调用单 Agent，困难题才进入协作；同时用独立 Solver 和独立重算降低单链错误传播。该版本建立了后续版本一直保留的“按难度分配计算量”原则。
+- Windows PowerShell。
+- NVIDIA CUDA GPU；现有实验在单卡、4-bit NF4、BF16 计算配置下完成。
+- 测试使用已经配置好的 Conda 环境。
+- 默认模型目录：`baselines/models`。也可用环境变量 `MULTIAGENT_MODEL_PATH` 指向另一份完整的 Qwen3.5 权重。
 
-### V3：闭环验证与条件救援
 
-```text
-Entropy Router
-  └─ Planner -> Primary Solver -> Adversarial Verifier
-             -> Reviser（条件触发）
-             -> Independent Final Checker
-             -> Rescue Solver（条件触发）
-             -> Rescue Finalizer（必要时收尾）
-```
+## 5. 正式运行命令
 
-V3 强化真正的角色协作：Planner 明确目标量和答案类型；对抗验证器寻找反例；独立终检避免被批评意见锚定；验证失败才启动修订和救援。正常通过时跳过额外调用，以控制成本。该主干正式结果为 188/200，换种子重复运行为 189/200。
+所有运行脚本采用 JSONL 追加写入并支持断点续跑。同一 `problem_id + run_id + mode + method + experiment_version` 已存在时会跳过；重新实验应换输出文件或 `run-id`，不要覆盖保留结果。
 
-### V4：两阶段证据评审探索
+### 5.1 V4.1 最终正式集
 
-V4 尝试“多名异构 Solver + 逻辑/计算双 Reviewer + 条件 Arbiter”。实验表明，角色差异过强会使 4B 模型的候选质量低于统一 CoT 采样；复杂评审也可能在已有正确候选时做出错误裁决。因此 V4 仅保留为结构探索，不作为最终正式对比结果。
-
-### V4.1：多数锁定与分歧协作
-
-```text
-Entropy Router
-  ├─ 低风险：Router 直接提交
-  └─ 高风险：3 个独立同分布 CoT Solver
-             ├─ 存在 2/3 多数：Conformist 锁定并提交
-             └─ 无多数：Evidence Auditor
-                        -> Disagreement Resolver
-                        -> Constraint-aware Finalizer（必要时）
-                        -> 唯一完整候选安全回退（仍未决时）
-```
-
-最终设计遵循以下思路：
-
-1. 候选生成与 SC 使用相同 Prompt、温度和采样方式，只改变随机种子，先保证基础候选质量。
-2. 2/3 多数出现后立即锁定，避免后续辩论把较可靠的多数答案带偏。
-3. 只有真正分歧时才通信：Evidence Auditor 整理目标、约束和冲突证据，Resolver 针对争议点重算，必要时由 Finalizer 收尾。
-4. 若完整协作链仍无答案，仅当三个 Solver 中恰好一个给出未截断且含显式 `FINAL_ANSWER` 的完整答案时采用它。
-
-因此 V4.1 不等同于简单投票：投票只是低成本共识门；分歧样本仍经过具有不同职责和信息交互的审计、重算与提交过程。
-
-## 可执行指令
-
-### 20 题开发集
-
-V1：
+完整 200 题实测约 10–11 小时。
 
 ```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_v1 --input data/dev_20.jsonl --output results/v1_dev_20.jsonl
+& $pythonExe -m scripts.run_v4_1 `
+  --mode adaptive `
+  --input data/eval_200.jsonl `
+  --output results/v4_1_eval_200_rerun.jsonl `
+  --router-config configs/router_v4_1.json `
+  --seed 42 `
+  --run-id 1 `
+  --strict-model
 ```
 
-V2：
+只运行指定题可重复传入 `--problem-id`；只跑前 N 题用 `--limit N`。
+
+### 5.2 Direct 与 CoT
 
 ```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_v2 --mode adaptive --input data/dev_20.jsonl --output results/v2_dev_20.jsonl --router-config configs/router_v2.json
+& $pythonExe -m scripts.run_single_agent --method direct --input data/dev_20.jsonl --output results/direct_live.jsonl --limit 1 --strict-model
+& $pythonExe -m scripts.run_single_agent --method cot    --input data/dev_20.jsonl --output results/cot_live.jsonl    --limit 1 --strict-model
 ```
 
-V3：
+### 5.3 Self-Consistency@5
 
 ```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_v3 --mode adaptive --input data/dev_20.jsonl --output results/v3_dev_20.jsonl --router-config configs/router_v3.json --seed 42 --run-id 0 --strict-model
+& $pythonExe -m scripts.run_self_consistency `
+  --input data/dev_20.jsonl `
+  --output results/sc_live.jsonl `
+  --num-samples 5 `
+  --seed 42 `
+  --run-id 1 `
+  --limit 1 `
+  --strict-model
 ```
 
-V4：
+### 5.4 V1–V4
 
 ```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_v4 --mode adaptive --input data/dev_20.jsonl --output results/v4_dev_20.jsonl --router-config configs/router_v4.json --seed 42 --run-id 0 --strict-model
+# V1：固定 Solver → Critic → Verifier → Judge
+& $pythonExe -m scripts.run_v1 --input data/dev_20.jsonl --output results/v1_live.jsonl --limit 1
+
+# V2：自适应 router
+& $pythonExe -m scripts.run_v2 --mode adaptive --input data/dev_20.jsonl --output results/v2_live.jsonl --router-config configs/router_v2.json --limit 1
+
+# V3：闭环验证
+& $pythonExe -m scripts.run_v3 --mode adaptive --input data/dev_20.jsonl --output results/v3_live.jsonl --router-config configs/router_v3.json --limit 1 --strict-model
+
+# V4：候选 + reviewer + arbiter
+& $pythonExe -m scripts.run_v4 --mode adaptive --input data/dev_20.jsonl --output results/v4_live.jsonl --router-config configs/router_v4.json --limit 1 --strict-model
 ```
 
-最终 V4.1：
+## 6. 保留结果与正式结论
 
-```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_v4_1 --mode adaptive --input data/dev_20.jsonl --output results/v4_1_dev_20.jsonl --router-config configs/router_v4_1.json --seed 42 --run-id 0 --strict-model
-```
+### 6.1 开发集结果
 
-### 200 题正式测试
+| 方法 | 正确数 / 20 | 结果文件 |
+|---|---:|---|
+| Direct | 17 / 20 | `results/direct_dev_20.jsonl` |
+| CoT | 18 / 20 | `results/cot_dev_20.jsonl` |
+| Self-Consistency@5 | 20 / 20 | `results/self_consistency_dev_20.jsonl` |
+| V1 | 18 / 20 | `results/v1_dev_20.jsonl` |
+| V2 | 16 / 20 | `results/v2_dev_20.jsonl` |
+| V3 | 19 / 20 | `results/v3_dev_20.jsonl` |
+| V4（run 2） | 20 / 20 | `results/v4_dev_20_run2.jsonl` |
 
-V3：
+开发集只用于结构迭代，不应用于声称正式泛化性能。
 
-```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_v3 --mode adaptive --input data/eval_200.jsonl --output results/v3_eval_200.jsonl --router-config configs/router_v3.json --seed 42 --run-id 0 --strict-model
-```
+### 6.2 200 题正式集
 
-SC@5：
+| 方法 | 正确数 / 题数 | 准确率 | 模型调用 | 总 token | 说明 |
+|---|---:|---:|---:|---:|---|
+| Direct | 46 / 200 | 23.0% | 200 | 36,270 | 审计结果 |
+| CoT | 174 / 200 | 87.0% | 200 | 263,794 | 审计结果 |
+| Self-Consistency@5, seed 42 | 187 / 200 | 93.5% | 1,000 | 1,362,606 | 审计结果 |
+| Self-Consistency@5, seed 43 | 189 / 200 | 94.5% | 1,000 | 1,366,850 | 完整运行 |
+| Self-Consistency@5, seed 44 | 188 / 200 | 94.0% | 1,000 | 1,380,117 | 完整运行 |
+| V2 | 172 / 200 | 86.0% | 620 | 1,277,038 | 完整运行 |
+| V3 | 188 / 200 | 94.0% | 741 | 1,329,695 | 审计结果；另一次完整运行为 189/200 |
+| V4 | 167 / 174 | — | 543 | 977,218 | 运行在 174 题处中断，不作为正式准确率 |
+| **V4.1, seed 42** | **193 / 200** | **96.5%** | **558** | **947,433** | 最终主结果 |
+| V4.1, seed 43 | 193 / 200 | 96.5% | 551 | 920,442 | 完整复验 |
+| V4.1, seed 44 | 191 / 200 | 95.5% | 544 | 888,180 | 完整复验 |
 
-```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_self_consistency --input data/eval_200.jsonl --output results/self_consistency_eval_200.jsonl --num-samples 5 --seed 42 --run-id 0 --strict-model
-```
+V4.1 三次正式运行平均为 **192.33/200（96.17%）**。按相同 seed 42 比较，V4.1 比 SC@5 多答对 6 题（+3.0 个百分点），模型调用减少 442 次（-44.2%），总 token 减少约 30.5%。V4.1 seed 42 的 7 道错误全部为 Level 5。
 
-最终 V4.1：
+seed 42 的分支构成：99 题由 router 直接回答；79 题形成 SC3 多数并锁定；11 题由 disagreement resolver 提交；5 题由 finalizer 提交；1 题使用唯一完整 SC 候选回退；5 题拒绝无依据提交。
 
-```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m scripts.run_v4_1 --mode adaptive --input data/eval_200.jsonl --output results/v4_1_eval_200.jsonl --router-config configs/router_v4_1.json --seed 42 --run-id 0 --strict-model
-```
+正式结果文件：
 
-脚本支持断点续跑；若需要从头复现实验，请使用新的输出文件名，避免已有记录被自动跳过。
+- `results/direct_eval_200_audited.jsonl`
+- `results/cot_eval_200_audited.jsonl`
+- `results/self_consistency_eval_200_audited.jsonl`
+- `results/v3_eval_200_audited.jsonl`
+- `results/v4_1_eval_200.jsonl`
+- `results/v4_1_eval_200_seed43.jsonl`
+- `results/v4_1_eval_200_seed44.jsonl`
 
-### 自动化测试
-
-```powershell
-& D:/anaconda3/envs/multiagent/python.exe -m unittest discover -s tests -v
-```
-
-## 最终实验结果
-
-所有方法使用同一基座模型和固定 200 题；Direct、CoT、SC@5 和 V3 采用人工格式复核后的结果。Token 为输入与输出 Token 总和。
-
-| 方法 | 正确数 | 准确率 | 模型调用 | Token |
-|---|---:|---:|---:|---:|
-| Direct | 46/200 | 23.0% | 200 | 36,270 |
-| CoT | 174/200 | 87.0% | 200 | 263,794 |
-| Self-Consistency@5 | 187/200 | 93.5% | 1,000 | 1,362,606 |
-| V3（正式） | 188/200 | 94.0% | 741 | 1,329,695 |
-| V3（重复运行） | 189/200 | 94.5% | 725 | 1,278,356 |
-| **V4.1（最终）** | **193/200** | **96.5%** | **558** | **947,433** |
-
-V4.1 相比 SC@5 多做对 6 题，准确率提高 3.0 个百分点；调用次数减少 44.2%，Token 减少 30.5%。其中有5题提升直接来自投票之后的多 Agent 推理、纠错和裁决机制。
-配对检验约 \(p=0.031\)，达到常用显著性标准。
-
-### V4.1 分支结果
-
-| 分支 | 正确/总数 |
-|---|---:|
-| Router 单 Agent | 99/99 |
-| 三 Solver 多数锁定 | 79/79 |
-| 分歧由 Resolver 解决 | 11/11 |
-| 分歧由 Finalizer 收尾 | 4/6 |
-| 最终仍未决 | 0/5 |
-
-剩余 7 道错题全部为 Level 5，并且均因 Router 达到生成上限而进入多 Agent 路径。这说明当前主要瓶颈已集中在小模型对高难中间代数和组合概率题的基础推理能力，而不是简单题路由。
-
-## 结果文件与实验边界
-
-- 最终 V4.1：`results/v4_1_eval_200.jsonl`
-- SC@5 复核：`results/self_consistency_eval_200_audited.jsonl`
-- V3 复核：`results/v3_eval_200_audited.jsonl`
-- V3 重跑：`results/v3_eval_200_run1.jsonl`
-- Direct/CoT 复核：`results/direct_eval_200_audited.jsonl`、`results/cot_eval_200_audited.jsonl`
+保留的无 `_audited` 旧文件用于实验追溯；论文/答辩引用时应优先采用表中明确标注的审计结果。`results/v4_eval_200.jsonl` 只有 174 行，不能把 167/174 外推为完整正式集成绩。
